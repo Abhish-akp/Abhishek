@@ -1,5 +1,6 @@
 //Program of linked list using c++ 
-
+#include<stdio.h>
+#include<stdlib.h>
 typedef struct nodetype{
 	int info;
 	struct nodetype *next;
@@ -42,49 +43,13 @@ void display(node *start){                        // DISPLAY ELEMENT OF LINKED L
 	}
 }
 
-void delete_at_beg(node** start){                // DELETE AT BEGINNING OF LINKED LIST
-    node *ptr;
-	if(*start==NULL){
-		printf("Linked list is empty");
-		return ;
-	}	
-	ptr=*start;
-	*start=ptr->next;
-	printf("\n Delete Value is:%d",ptr->info);
-	free(ptr);
-}
-
-void delete_at_end(node **start){                // DELETE AT END OF LINKED LIST
-	node *ptr,*last;
-	if(*start==NULL){
-		printf("Empty Linked list");
-		return ;
-	}
-	if((*start)->next==NULL){
-		ptr=*start;
-		*start=NULL;
-	}
-	else{
-		last=*start;
-		while(last->next->next!=NULL){
-			last=last->next;
-		}
-		ptr=last->next;
-		last->next=NULL;
-	}
-	printf("\n Delete Value is:%d",ptr->info);
-	free(ptr);
-}
-
 int main() {
-	int item,ch,after,before;
+	int item,ch,after;
 	node *head;
 	head = NULL;
 		printf(" Menu is\n1.Insert element at beg ");
 		printf("\n2.Insert element at end ");
 		printf("\n3.Display element ");
-		printf("\n4.Delete element at beg ");
-		printf("\n5.Delete element at end ");
 	while(1){
 	    printf("\nSelect case:");
 		scanf("%d",&ch);
@@ -102,12 +67,6 @@ int main() {
 			case 3:
 			    printf("\n.Display element:");
 				display(head);
-			break;
-			case 4:
-			    delete_at_beg(&head);
-			break;
-			case 5:
-				delete_at_end(&head);
 			break;
 		default:exit(1);
 		}
