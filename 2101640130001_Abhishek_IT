@@ -43,7 +43,7 @@ void display(node *start){                        // DISPLAY ELEMENT OF LINKED L
 	}
 }
 
-void insert_after_loc(node **head, int data,int data_after){     // INSERT AFTER LOCATION
+void insert_after_pos(node **head, int data,int data_after){      // INSERT AFTER POSITION
 	node *temp,*ptr;
 	ptr=(node *)malloc(sizeof(node));
 	ptr->info=data;
@@ -55,14 +55,62 @@ void insert_after_loc(node **head, int data,int data_after){     // INSERT AFTER
 	temp->next=ptr;
 }
 
+void delete_at_beg(node **head){                  // DELETE AT BEGIN
+	node *temp;
+	temp=*head;
+	printf("Deleted Value : %d",temp->info);
+	*head= temp->next;
+	free(temp);
+}
+
+void delete_at_end(node **head){                      //DELETE AT END
+	node *temp;
+	temp=*head;
+	while(temp->next->next!=NULL){
+		temp=temp->next;
+	}
+	printf("%d",temp->next->info);
+	free(temp->next);
+	temp->next=NULL;
+}
+
+void delete_pos(node **head,int pos){        //DELETE ELEMENT AT PARTICULAR POSITION
+    node* temp; 
+    node* prev;
+    temp = *head;
+    prev = *head;
+    for (int i = 0; i < pos; i++) {
+        if (i == 0 && pos == 1) {
+            *head = (*head)->next;
+            free(temp);
+        }
+        else {
+            if (i == pos - 1 && temp) {
+                prev->next = temp->next;
+                free(temp);
+            }
+            else {
+                prev = temp;
+                if (prev == NULL)
+                    break;
+                temp = temp->next;
+            }
+        }
+    }
+
+}
+
 int main() {
-	int item,ch,after;
+	int item,ch,after,pos;
 	node *head;
 	head = NULL;
 		printf(" Menu is\n1.Insert element at beg ");
 		printf("\n2.Insert element at end ");
 		printf("\n3.Display element ");
 		printf("\n4.After location");
+		printf("\n5.delete at begin");
+		printf("\n6.delete at end");
+		printf("\n7.Delete at location");
 		
 	while(1){
 	    printf("\nSelect case:");
@@ -83,9 +131,23 @@ int main() {
 				display(head);
 			break;
 			case 4:
-				printf("\n.Enter element and element after you want to insert:");
+				printf("\n.Enter element and element after which you have to insert:");
 				scanf("%d %d",&item,&after);
-				insert_after_loc(&head,item,after);
+				insert_after_pos(&head,item,after);
+			break;
+			case 5:
+			    delete_at_beg(&head);
+			    printf("DONE !!!");
+			break;
+			case 6:
+			    delete_at_end(&head);
+			    printf("\n DONE !!!");
+			break;
+			case 7:
+				printf("\n.Enter position :");
+				scanf("%d",&pos);
+				delete_pos(&head,pos);
+				printf("\n DONE !!!");
 			break;
 		default:exit(1);
 		}
