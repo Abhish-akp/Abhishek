@@ -43,6 +43,18 @@ void display(node *start){                        // DISPLAY ELEMENT OF LINKED L
 	}
 }
 
+void insert_after_loc(node **head, int data,int data_after){
+	node *temp,*ptr;
+	ptr=(node *)malloc(sizeof(node));
+	ptr->info=data;
+	temp=*head;
+	while(temp->info!=data_after){
+		temp=temp->next;
+	}
+	ptr->next=temp->next;
+	temp->next=ptr;
+}
+
 int main() {
 	int item,ch,after;
 	node *head;
@@ -50,6 +62,8 @@ int main() {
 		printf(" Menu is\n1.Insert element at beg ");
 		printf("\n2.Insert element at end ");
 		printf("\n3.Display element ");
+		printf("\n4.After location");
+		
 	while(1){
 	    printf("\nSelect case:");
 		scanf("%d",&ch);
@@ -67,6 +81,11 @@ int main() {
 			case 3:
 			    printf("\n.Display element:");
 				display(head);
+			break;
+			case 4:
+				printf("\n.Enter element and element after you want to insert:");
+				scanf("%d %d",&item,&after);
+				insert_after_loc(&head,item,after);
 			break;
 		default:exit(1);
 		}
