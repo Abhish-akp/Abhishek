@@ -75,29 +75,16 @@ void delete_at_end(node **head){                      //DELETE AT END
 }
 
 void delete_pos(node **head,int pos){        //DELETE ELEMENT AT PARTICULAR POSITION
-    node* temp; 
-    node* prev;
-    temp = *head;
-    prev = *head;
-    for (int i = 0; i < pos; i++) {
-        if (i == 0 && pos == 1) {
-            *head = (*head)->next;
-            free(temp);
-        }
-        else {
-            if (i == pos - 1 && temp) {
-                prev->next = temp->next;
-                free(temp);
-            }
-            else {
-                prev = temp;
-                if (prev == NULL)
-                    break;
-                temp = temp->next;
-            }
-        }
-    }
-
+  	pos--;
+	node *ptr;
+	ptr=*head;
+	while(pos>1){
+		ptr=ptr->next;
+		pos--;
+	}
+	node *temp=ptr->next;
+	ptr->next=ptr->next->next;
+	free(temp);
 }
 
 int main() {
