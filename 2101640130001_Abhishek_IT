@@ -43,7 +43,7 @@ void display(node *start){                        // DISPLAY ELEMENT OF LINKED L
 	}
 }
 
-void insert_after_loc(node **head, int data,int data_after){
+void insert_after_loc(node **head, int data,int data_after){     // INSERT AFTER LOCATION
 	node *temp,*ptr;
 	ptr=(node *)malloc(sizeof(node));
 	ptr->info=data;
