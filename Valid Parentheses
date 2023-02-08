@@ -1,0 +1,19 @@
+// Leetcode Question No. 20
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> va;  
+        for(auto i:s)
+        {
+            if(i=='(' or i=='{' or i=='[')
+                va.push(i); 
+            else
+            {
+             if(va.empty() || (va.top()=='(' && i!=')') || (va.top()=='{' && i!='}') || (va.top()=='[' && i!=']')) 
+                 return false;
+                va.pop(); 
+            }
+        }
+        return va.empty();
+    }
+};
