@@ -1,0 +1,30 @@
+// leetcode Question No. 503
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        vector<int>vec(nums.size());
+        stack<int>s;
+       for(int i=0;i<nums.size();i++){
+           if(!s.empty())
+            while(s.size()>0  && nums[s.top()]<nums[i]){
+             int x=s.top();
+             vec[x]=nums[i];
+             s.pop();
+            }
+           s.push(i);
+       }
+        for(int i=0;i<nums.size();i++){
+           if(!s.empty())
+            while(s.size()>0 && nums[s.top()]<nums[i]){
+             int x=s.top();
+             vec[x]=nums[i];
+             s.pop();
+            }
+       }
+       while(!s.empty()){
+           vec[s.top()]=-1;
+           s.pop();
+       }
+        return vec;
+    }
+};
